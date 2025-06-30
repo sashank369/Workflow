@@ -9,7 +9,7 @@ class FormTemplateSerializer(serializers.ModelSerializer):
 class TransitionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Transition
-        fields = ['id', 'from_state', 'to_state', 'allowed_roles']
+        fields = ['id', 'from_state', 'to_state', 'allowed_roles', 'logical_type']  # added logical_type
 
 class WorkflowDefinitionSerializer(serializers.ModelSerializer):
     transitions = TransitionSerializer(many=True)
@@ -35,4 +35,4 @@ class WorkflowInstanceSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = WorkflowInstance
-        fields = ['id', 'submission', 'current_state', 'updated_at']
+        fields = ['id', 'submission', 'current_state', 'partial_approvals', 'updated_at']
