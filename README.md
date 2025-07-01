@@ -21,6 +21,35 @@ Organizations often require workflows for form submissions that involve multiple
 
 ---
 
+## Frontend
+
+- **Stack:** React, Tailwind CSS
+- **Structure:**
+  - Role-based dashboards for Admin, Employee, and Approver (Manager/HR)
+  - Uses Axios for API requests to the Django backend
+  - Handles authentication via Keycloak JWT tokens stored in localStorage
+  - Modern UI with Tailwind CSS for styling
+- **Setup & Run:**
+  1. Navigate to `workflow-frontend` directory:
+     ```bash
+     cd workflow-frontend
+     ```
+  2. Install dependencies:
+     ```bash
+     npm install
+     ```
+  3. Start the development server:
+     ```bash
+     npm start
+     ```
+     The app will run at `http://localhost:3000` by default.
+- **Interaction:**
+  - The frontend communicates with the Django backend via REST API endpoints.
+  - JWT tokens are included in API requests for authentication and role-based access.
+  - Dashboards and available actions are determined by the user's role (decoded from the JWT).
+
+---
+
 ## Setup or Run Instructions
 
 ### Prerequisites
@@ -28,8 +57,9 @@ Organizations often require workflows for form submissions that involve multiple
 - Python 3.8+
 - PostgreSQL
 - Keycloak server (for authentication)
+- Node.js and npm (for frontend)
 
-### Installation
+### Installation (Backend)
 
 ```bash
 # Clone repository
@@ -77,11 +107,12 @@ Authorization: Bearer <your-jwt-token>
 ```
 
 ### Setup Keycloak:
--  Create realm `demo-realm`
--  Add client `django-backend`
--  Set Web Origins → `http://localhost:3000`
--  Set redirect URIs → `http://localhost:3000/*`
--  Define roles: Admin, Employee, Manager, HR
+
+- Create realm `demo-realm`
+- Add client `django-backend`
+- Set Web Origins → `http://localhost:3000`
+- Set redirect URIs → `http://localhost:3000/*`
+- Define roles: Admin, Employee, Manager, HR
 
 ## Assumptions Made
 
