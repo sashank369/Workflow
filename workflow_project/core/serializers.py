@@ -26,9 +26,12 @@ class WorkflowDefinitionSerializer(serializers.ModelSerializer):
         return workflow
 
 class FormSubmissionSerializer(serializers.ModelSerializer):
+    form_template = serializers.PrimaryKeyRelatedField(queryset=FormTemplate.objects.all(), write_only=True)
+    form_template_details = FormTemplateSerializer(source='form_template', read_only=True)
+
     class Meta:
         model = FormSubmission
-        fields = ['id', 'form_template', 'submitted_by', 'data', 'submitted_at']
+        fields = ['id', 'form_template', 'form_template_details', 'submitted_by', 'data', 'submitted_at']
 
 class WorkflowInstanceSerializer(serializers.ModelSerializer):
     submission = FormSubmissionSerializer()
