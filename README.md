@@ -21,6 +21,15 @@ Organizations often require workflows for form submissions that involve multiple
 
 ---
 
+## Prerequisites
+
+- Python 3.8+
+- PostgreSQL
+- Keycloak server (for authentication)
+- Node.js and npm (for frontend)
+
+---
+
 ## Frontend
 
 - **Stack:** React, Tailwind CSS
@@ -50,16 +59,7 @@ Organizations often require workflows for form submissions that involve multiple
 
 ---
 
-## Setup or Run Instructions
-
-### Prerequisites
-
-- Python 3.8+
-- PostgreSQL
-- Keycloak server (for authentication)
-- Node.js and npm (for frontend)
-
-### Installation (Backend)
+## Installation (Backend)
 
 ```bash
 # Clone repository
