@@ -59,6 +59,49 @@ Organizations often require workflows for form submissions that involve multiple
 
 ---
 
+## Backend API Endpoints
+
+The backend exposes a set of REST API endpoints for managing workflows, forms, and approvals. All endpoints require authentication via Keycloak JWT, and access is controlled by user roles (Admin, Employee, Manager, HR, Finance).
+
+### Form Management 
+
+- `POST /api/form-template/` — Create a new form template  (Admin only)
+- `PUT /api/form-template/<id>/` — Update an existing form template  (Admin only)
+- `GET /api/form-templates/` — List all form templates
+
+### Workflow Definition 
+
+- `POST /api/workflow-definition/` — Define a new workflow (states, transitions, roles) (Admin only)
+- `PUT /api/workflow-definition/<id>/` — Update an existing workflow definition  (Admin only)
+- `GET /api/workflows/` — List all workflow definitions  (Admin only)
+
+### Form Submission 
+
+- `POST /api/submit-form/` — Submit a form to start a workflow
+- `GET /api/my-submissions/` — List submissions made by the logged-in employee (Employee)
+
+### Workflow Operations (Approvers: Manager, HR)
+
+- `GET /api/pending-approvals/` — List workflow instances pending approval for the logged-in approver
+- `GET /api/transitions/<submission_id>/` — Get available transitions for a submission (based on current state and user role)
+- `POST /api/transition/` — Transition a workflow to the next state
+
+
+#### How to Access
+
+- All endpoints are under `/api/` and require the `Authorization: Bearer <your-jwt-token>` header.
+- The available endpoints and actions depend on the user's role, which is determined from the JWT token.
+- The frontend automatically includes the JWT in requests and shows/hides actions based on the user's role.
+
+#### Use of Endpoints
+
+- **Admins**: Create and manage form templates and workflow definitions.
+- **Employees**: Submit forms and track their own submissions.
+- **Approvers (Manager, HR, Finance)**: View and act on pending approvals, transition workflows as per their role.
+
+
+---
+
 ## Installation (Backend)
 
 ```bash
@@ -117,8 +160,11 @@ Authorization: Bearer <your-jwt-token>
 ## Assumptions Made
 
 - All users and roles are managed in Keycloak; the system trusts the JWT for role validation.
+- Users and roles are created by Keycloak GUI only. And there are only 3 category of roles (Admin, Approver and employee).
+- And make sure password for users is "password" and make temparary password off.
+- Add respective details like email, first and last name because then only user will be created completely.
 - The workflow definitions (states, transitions, roles) are created by Admin users.
 - The frontend and backend are run separately; CORS and API endpoints are configured accordingly.
 - PostgreSQL is used as the database backend.
 - The system is deployed in a secure environment where Keycloak and the Django server can communicate.
-- Email notifications, advanced analytics, and mobile support are planned as future enhancements.
+- 
