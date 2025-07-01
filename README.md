@@ -77,11 +77,11 @@ Authorization: Bearer <your-jwt-token>
 ```
 
 ### Setup Keycloak:
-- 1. Create realm `demo-realm`
-- 2. Add client `django-backend`
-- 3. Set Web Origins → `http://localhost:3000`
-- 4. Set redirect URIs → `http://localhost:3000/*`
-- 5. Define roles: Admin, Employee, Manager, HR
+-  Create realm `demo-realm`
+-  Add client `django-backend`
+-  Set Web Origins → `http://localhost:3000`
+-  Set redirect URIs → `http://localhost:3000/*`
+-  Define roles: Admin, Employee, Manager, HR
 
 ## Assumptions Made
 
