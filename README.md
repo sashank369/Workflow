@@ -76,16 +76,12 @@ Include your Keycloak JWT token in request headers:
 Authorization: Bearer <your-jwt-token>
 ```
 
-### Testing
-
-```bash
-python manage.py test
-# or with coverage
-coverage run --source='.' manage.py test
-coverage report
-```
-
----
+### Setup Keycloak:
+# 1. Create realm `demo-realm`
+# 2. Add client `django-backend`
+# 3. Set Web Origins → `http://localhost:3000`
+# 4. Set redirect URIs → `http://localhost:3000/*`
+# 5. Define roles: Admin, Employee, Manager, HR
 
 ## Assumptions Made
 
